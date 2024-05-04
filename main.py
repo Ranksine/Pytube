@@ -4,6 +4,11 @@
         web o en android)
 
     Nota* Es necesario instalar la libreria pytube [pip install pytube]
+    Nota* Para crear el ejecutable es necesario lo siguiente:
+        - Instalar PyInstaller: [pip install pyinstaller]
+        - Ejecutar esta linea en PowerShell:
+            Ejecutable directo ->[python -m PyInstaller --onefile main.py]
+            Ejecutable con icono ->[python -m PyInstaller --onefile --icon = <<archivoIcono.ico>> main.py]
 """
 
 from pytube import YouTube
@@ -11,10 +16,12 @@ import os
 
 try:
     # Crear la carpeta de descargas en el proyecto para almacenar los videos
-    ruta_proyecto = os.path.dirname(os.path.abspath(__file__))
-    carpeta = os.path.join(ruta_proyecto, "Descargas")
+    carpeta = "Descargas"
     if not os.path.exists(carpeta):
         os.makedirs(carpeta)
+
+    print("Source Library: pytube.io".center(50, '-'), '\n')
+    print(" ¡¡Descarga videos de YouTube!! ".center(5,'-'), '\n')
 
     yt = input('Ingresa el link del video: ')
     yt = YouTube(yt)
@@ -32,7 +39,7 @@ try:
     # Obtener las calidades de video disponibles para descarga
     calidadesDisponibles = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc()
 
-    print('Opciones de calidad disponibles:')    
+    print('Selecciona el numero de una de las opciones de calidad disponibles:')
     for x, stream in enumerate(calidadesDisponibles):
         print(f"{x + 1}. {stream.resolution} - {stream.mime_type} - {stream.filesize / (1024*1024):.2f} MB")
 
