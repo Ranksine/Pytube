@@ -1,9 +1,9 @@
 """
-Nota* Es necesario instalar la libreria pytube [pip install pytube]
-
     Mini programa para descargar videos de Youtube utilizando la librería Pytube
     (Base back-end lista desarrollarle una interfáz gráfica, bien puede ser en
         web o en android)
+
+    Nota* Es necesario instalar la libreria pytube [pip install pytube]
 """
 
 from pytube import YouTube
